@@ -1,0 +1,13 @@
+qemu-system-x86_64                           \
+  -accel kvm                                 \
+  -m 2G -nic user                            \
+  -hda alpine.qcow2                          \
+  -smp cpus=4,sockets=2                      \
+  -object memory-backend-ram,size=1G,id=m0   \
+  -object memory-backend-ram,size=1G,id=m1   \
+  -numa node,memdev=m0,nodeid=0              \
+  -numa node,memdev=m1,nodeid=1              \
+  -numa cpu,node-id=0,socket-id=0            \
+  -numa cpu,node-id=1,socket-id=1            \
+  -numa dist,src=0,dst=1,val=20              \
+  -nographic 
